@@ -32,5 +32,7 @@ void ConfigWindow::on_buttonBox_accepted()
     propXML.setCalcTX(ui->chkCalcTX->isChecked());
     propXML.setTXServ(ui->dblspnTXServ->value());
     propXML.setTXProm(ui->edt_txtprom->text());
+	// teste de commit
+    // mais um teste de commit.
 
 }
