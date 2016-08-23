@@ -3,8 +3,6 @@
 #include "iostream"
 #include <QString>
 #include <stdbool.h>
-#include <QDomDocument>
-#include <QDomElement>
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>
@@ -108,16 +106,67 @@ QString ManipuladorXML::getTxtProm(){
 
 
 void ManipuladorXML::GravaArquivo(){
+    /*
     //QString caminho = GetCurrentDir;
     QString NomeDoArquivo =  "config.xml";
     QFile file(NomeDoArquivo);
 
     QDomDocument arquivo;
-    auto raiz = arquivo.createElement("Configuracoes");
-/*
+    arquivo.setContent(&file);
+
+    QDomElement raiz = arquivo.firstChildElement();
+
+
+
+    QString nomempresa = raiz.elementsByTagName("Empresa");
+
+
     QTextStream xout (&file);
     xout << arquivo.toString();
     file.flush();
     file.close();
     */
+}
+
+void ManipuladorXML::LeArquivo(){
+    QString NomeDoArquivo =  "config.xml";
+    QFile file(NomeDoArquivo);
+
+    QDomDocument arquivo;
+    arquivo.setContent(&file);
+
+    QDomElement raiz = arquivo.firstChildElement();
+    QDomNodeList nos = arquivo.childNodes();
+    for (itn i = 0; i< nos.count(); i++){
+        QDomNode no = nos.at(i);
+        if (no.isElement()){
+            QDomElement elemento = no.toElement();
+        }
+
+    }
+    QDomElement tags = nos
+
+
+
+    QDomElement empresa = raiz.firstChildElement();
+    QString nomeempresa = empresa.firstChildElement("nome").text();
+
+    setEnd1(nomeempresa);
+
+
+/*
+    QDomNodeList nos = raiz.childNodes();
+    nos.
+
+
+
+    QDomNodeList elementos = raiz.elementsByTagName("Empresa");
+    QDomCharacterData = raiz.
+    QString nempresa = elementos.
+
+*/
+
+
+    //setEmpresa(raiz.elementsByTagName("Empresa"));
+
 }

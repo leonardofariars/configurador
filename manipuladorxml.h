@@ -4,6 +4,8 @@
 
 #include <QString>
 #include <stdbool.h>
+#include <QtXml>
+
 
 class ManipuladorXML
 {
