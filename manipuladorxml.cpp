@@ -129,22 +129,31 @@ void ManipuladorXML::GravaArquivo(){
 }
 
 void ManipuladorXML::LeArquivo(){
-    QString NomeDoArquivo =  "config.xml";
+    QString NomeDoArquivo =  "c:/config.xml";
     QFile file(NomeDoArquivo);
 
     QDomDocument arquivo;
     arquivo.setContent(&file);
 
+    // Seta o root do documento
     QDomElement raiz = arquivo.firstChildElement();
-    QDomNodeList nos = arquivo.childNodes();
-    for (itn i = 0; i< nos.count(); i++){
+
+    // Pega todos os nós abaixo de nó Empresa
+    QDomNodeList nos = raiz.elementsByTagName("Empresa");
+
+    for (int i = 0; i< nos.count(); i++){// percorre os nós filhos
         QDomNode no = nos.at(i);
-        if (no.isElement()){
+        if (no.isElement()){ // se for elemento verifica qual e grava na classe.
             QDomElement elemento = no.toElement();
+            QString nomeEl = elemento.nodeName();
+            nomeEl = nomeEl.toUpper();
+            if (nomeEl == "NOME" ) setEmpresa(elemento.text());
+                else if (nomeEl == "TELEFONE") setTelefone(elemento.text());
+                    else if (nomeEl == "CNPJ") setCNPJ(elemento.text());
         }
 
     }
-    QDomElement tags = nos
+
 
 
 

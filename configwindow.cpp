@@ -19,8 +19,11 @@ ManipuladorXML ConfigWindow::getManipuladorXML() const{
 ConfigWindow::~ConfigWindow()
 {
     delete ui;
-    ui->edt_end1->setText(propXML.getEnd1());
-    ui->edt_end2->setText(propXML.getEnd2());
+    ui->edt_nome->setText(propXML.getEmpresa());
+    ui->edt_cnpj->setText(propXML.getCNPJ());
+    ui->edt_telefone->setText(propXML.getTelefone());
+    //ui->edt_end1->setText(propXML.getEnd1());
+    //ui->edt_end2->setText(propXML.getEnd2());
 }
 
 void ConfigWindow::on_buttonBox_accepted()
