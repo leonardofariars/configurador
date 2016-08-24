@@ -10,6 +10,13 @@ ConfigWindow::ConfigWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     //ui->edt_nome->setText(propXML.getEmpresa());
+
+
+    ManipuladorXML x;
+    x.LeArquivo();
+    ui->edt_nome->setText(x.getEmpresa());
+    ui->edt_cnpj->setText(x.getCNPJ());
+    ui->edt_telefone->setText(x.getTelefone());
 }
 
 ManipuladorXML ConfigWindow::getManipuladorXML() const{
@@ -18,12 +25,10 @@ ManipuladorXML ConfigWindow::getManipuladorXML() const{
 
 ConfigWindow::~ConfigWindow()
 {
+
+
     delete ui;
-    ui->edt_nome->setText(propXML.getEmpresa());
-    ui->edt_cnpj->setText(propXML.getCNPJ());
-    ui->edt_telefone->setText(propXML.getTelefone());
-    //ui->edt_end1->setText(propXML.getEnd1());
-    //ui->edt_end2->setText(propXML.getEnd2());
+
 }
 
 void ConfigWindow::on_buttonBox_accepted()
@@ -37,7 +42,5 @@ void ConfigWindow::on_buttonBox_accepted()
     propXML.setCalcTX(ui->chkCalcTX->isChecked());
     propXML.setTXServ(ui->dblspnTXServ->value());
     propXML.setTXProm(ui->edt_txtprom->text());
-	// teste de commit
-    // mais um teste de commit.
 
 }

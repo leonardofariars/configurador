@@ -7,12 +7,6 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     ConfigWindow w;
-    ManipuladorXML c;
-    c.LeArquivo();
-
-
-
-
 
 
     w.show();
