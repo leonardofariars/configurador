@@ -6,6 +6,10 @@
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>
+#include "tinyxml2.h"
+#include <QXmlReader>
+
+
 
 #ifdef WINDOWS
     #include <direct.h>
@@ -132,16 +136,70 @@ void ManipuladorXML::LeArquivo(){
     QString NomeDoArquivo =  "c:/config.xml";
     QFile file(NomeDoArquivo);
 
+    if (! file.open(QIODevice::ReadOnly | QIODevice::Text)){
+        return;
+    }
+
+    QByteArray dadosXML(file.readAll());
+
     QDomDocument arquivo;
-    arquivo.setContent(&file);
+
+    arquivo.setContent(dadosXML);
 
     // Seta o root do documento
-    QDomElement raiz = arquivo.firstChildElement();  
+/*
+
+    QDomElement raiz = arquivo.firstChildElement();
+    QDomText texto;
+
+    texto = raiz.
 
 
-    QDomNodeList nos = raiz.elementsByTagName("nome");
-    QDomNode no = nos.at(0);
+    QDomNodeList nosfilhos = raiz.childNodes();
+    QDomNode noatual;
+
+    arquivo.TextNode
+
+    for (int i = 0; i< nosfilhos.count(); i++){
+        noatual = nosfilhos.at(i);
+        QDomElement elemento;
+        QDomNode = na;
+        na.
+
+        if ( noatual.isElement() ){
+            elemento = noatual.toElement();
+
+            QString nmno = elemento.nodeName();
+            QString vlno = elemento.nodeValue();
+            QDomText txt = elemento.toText();
+
+
+
+
+            QString txno = txt.data();
+            QString atr = elemento.   attribute("nn");
+        }
+    }
+
+
+
+
+
+    QDomNodeList nos = raiz.elementsByTagName(raiz.nodeName());
     QDomElement elemento;
+
+    for (int i = 0; i< nos.count(); i++){// percorre os nós filhos
+        elemento = nos.at(i);
+        if (no.isElement()){ // se for elemento verifica qual e grava na classe.
+            QDomElement elemento = no.toElement();
+            QString nomeEl = elemento.nodeName();
+            nomeEl = nomeEl.toUpper();
+                if (nomeEl == "NOME" ) setEmpresa(elemento.text());
+                    else if (nomeEl == "TELEFONE") setTelefone(elemento.text());
+                         else if (nomeEl == "CNPJ") setCNPJ(elemento.text());
+             }
+    }
+
 
     if (no.isElement()) // se for elemento grava na classe.
         setEmpresa(elemento.text());
@@ -157,8 +215,35 @@ void ManipuladorXML::LeArquivo(){
     no = nos.at(0);
     if (no.isElement()) // se for elemento grava na classe.
         setCNPJ(elemento.text());
-    else setCNPJ("");
+    else setCNPJ("");*/
 
 
 
 }
+
+void ManipuladorXML::LeArquivo2(){
+    QXmlStreamReader xmlReader;
+
+    QString NomeDoArquivo =  "c:/config.xml";
+    QFile file(NomeDoArquivo);
+
+    if (! file.open(QIODevice::ReadOnly | QIODevice::Text)){
+            return;
+    }
+
+    xmlReader.setDevice(&file);
+    xmlReader.readNext();
+
+    while (! xmlReader.atEnd()){
+
+        if (xmlReader.name() == "nome"){
+            QString nmempresa = xmlReader.readElementText();
+            setEmpresa(nmempresa);
+        } else xmlReader.readNext();
+
+    }
+
+
+
+}
+

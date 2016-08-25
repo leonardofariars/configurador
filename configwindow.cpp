@@ -37,6 +37,7 @@ void ConfigWindow::on_buttonBox_accepted()
 {
     ManipuladorXML leitor;
     leitor.LeArquivo();
+    leitor.LeArquivo2();
     ui->edt_nome->setText(leitor.getEmpresa());
     ui->edt_cnpj->setText(leitor.getCNPJ());
     ui->edt_telefone->setText(leitor.getTelefone());
