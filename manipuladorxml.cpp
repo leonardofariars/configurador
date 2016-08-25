@@ -136,46 +136,29 @@ void ManipuladorXML::LeArquivo(){
     arquivo.setContent(&file);
 
     // Seta o root do documento
-    QDomElement raiz = arquivo.firstChildElement();
-
-    // Pega todos os nós abaixo de nó Empresa
-    QDomNodeList nos = raiz.elementsByTagName("Empresa");
-
-    for (int i = 0; i< nos.count(); i++){// percorre os nós filhos
-        QDomNode no = nos.at(i);
-        if (no.isElement()){ // se for elemento verifica qual e grava na classe.
-            QDomElement elemento = no.toElement();
-            QString nomeEl = elemento.nodeName();
-            nomeEl = nomeEl.toUpper();
-            if (nomeEl == "NOME" ) setEmpresa(elemento.text());
-                else if (nomeEl == "TELEFONE") setTelefone(elemento.text());
-                    else if (nomeEl == "CNPJ") setCNPJ(elemento.text());
-        }
-
-    }
+    QDomElement raiz = arquivo.firstChildElement();  
 
 
+    QDomNodeList nos = raiz.elementsByTagName("nome");
+    QDomNode no = nos.at(0);
+    QDomElement elemento;
+
+    if (no.isElement()) // se for elemento grava na classe.
+        setEmpresa(elemento.text());
+    else setEmpresa("");
+
+    nos = raiz.elementsByTagName("telefone");
+    no = nos.at(0);
+    if (no.isElement()) // se for elemento grava na classe.
+        setTelefone(elemento.text());
+    else setTelefone("");
+
+    nos = raiz.elementsByTagName("cnpj");
+    no = nos.at(0);
+    if (no.isElement()) // se for elemento grava na classe.
+        setCNPJ(elemento.text());
+    else setCNPJ("");
 
 
-    QDomElement empresa = raiz.firstChildElement();
-    QString nomeempresa = empresa.firstChildElement("nome").text();
-
-    setEnd1(nomeempresa);
-
-
-/*
-    QDomNodeList nos = raiz.childNodes();
-    nos.
-
-
-
-    QDomNodeList elementos = raiz.elementsByTagName("Empresa");
-    QDomCharacterData = raiz.
-    QString nempresa = elementos.
-
-*/
-
-
-    //setEmpresa(raiz.elementsByTagName("Empresa"));
 
 }

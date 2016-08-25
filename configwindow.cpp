@@ -4,6 +4,7 @@
 #include <QMessageBox>
 
 
+
 ConfigWindow::ConfigWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ConfigWindow)
@@ -11,12 +12,13 @@ ConfigWindow::ConfigWindow(QWidget *parent) :
     ui->setupUi(this);
     //ui->edt_nome->setText(propXML.getEmpresa());
 
-
+/*
     ManipuladorXML x;
     x.LeArquivo();
     ui->edt_nome->setText(x.getEmpresa());
     ui->edt_cnpj->setText(x.getCNPJ());
     ui->edt_telefone->setText(x.getTelefone());
+    */
 }
 
 ManipuladorXML ConfigWindow::getManipuladorXML() const{
@@ -33,14 +35,9 @@ ConfigWindow::~ConfigWindow()
 
 void ConfigWindow::on_buttonBox_accepted()
 {
-    propXML.setEmpresa(ui->edt_nome->text());
-    propXML.setTelefone(ui->edt_telefone->text());
-    propXML.setCNPJ(ui->edt_cnpj->text());
-    propXML.setEnd1(ui->edt_end1->text());
-    propXML.setEnd2(ui->edt_end2->text());
-    propXML.setNMesas(ui->spn_mesas->value());
-    propXML.setCalcTX(ui->chkCalcTX->isChecked());
-    propXML.setTXServ(ui->dblspnTXServ->value());
-    propXML.setTXProm(ui->edt_txtprom->text());
-
+    ManipuladorXML leitor;
+    leitor.LeArquivo();
+    ui->edt_nome->setText(leitor.getEmpresa());
+    ui->edt_cnpj->setText(leitor.getCNPJ());
+    ui->edt_telefone->setText(leitor.getTelefone());
 }

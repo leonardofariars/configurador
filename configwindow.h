@@ -2,6 +2,7 @@
 #define CONFIGWINDOW_H
 
 #include <QMainWindow>
+
 #include "manipuladorxml.h"
 
 namespace Ui {
@@ -20,6 +21,8 @@ public:
     ~ConfigWindow();
 
 private slots:
+
+
     void on_buttonBox_accepted();
 
 private:
