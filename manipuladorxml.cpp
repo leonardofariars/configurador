@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include "tinyxml2.h"
 #include <QXmlReader>
+#include <QDebug>
 
 
 
@@ -222,18 +223,40 @@ void ManipuladorXML::LeArquivo(){
 }
 
 void ManipuladorXML::LeArquivo2(){
-    QXmlStreamReader xmlReader;
 
-    QString NomeDoArquivo =  "c:/config.xml";
-    QFile file(NomeDoArquivo);
+    QFile arqXML("c:/config.xml");
 
-    if (! file.open(QIODevice::ReadOnly | QIODevice::Text)){
-            return;
+    if (! arqXML.open(QIODevice::ReadOnly | QIODevice::Text) ) {
+
+//        QMessageBox::critical(this,"Erro de leitura",
+//        "Ocorreu um problema ao abrir o arquivo XML com configurações da aplicação.");
+                    return;
+     }
+    QXmlStreamReader xmlReader(&arqXML);
+
+
+
+    while(!xmlReader.atEnd() && !xmlReader.hasError()) {
+
+        // Read next element
+        QXmlStreamReader::TokenType token = xmlReader.readNext();
+        //If token is just StartDocument - go to next
+        if(token == QXmlStreamReader::StartDocument) {
+            continue;
+        }
+        //If token is StartElement - read it
+        if(token == QXmlStreamReader::StartElement) {
+            if(xmlReader.name() == "name") {
+                continue;
+            }
+            if(xmlReader.name() == "id") {
+                qDebug() << xmlReader.readElementText();
+            }
+        }
     }
 
-    xmlReader.setDevice(&file);
-    xmlReader.readNext();
 
+/*
     while (! xmlReader.atEnd()){
 
         if (xmlReader.name() == "nome"){
@@ -243,7 +266,54 @@ void ManipuladorXML::LeArquivo2(){
 
     }
 
+*/
+
+    /*
+
+xmlFile = new QFile("xmlFile.xml");
+        if (!xmlFile->open(QIODevice::ReadOnly | QIODevice::Text)) {
+                QMessageBox::critical(this,"Load XML File Problem",
+                "Couldn't open xmlfile.xml to load settings for download",
+                QMessageBox::Ok);
+                return;
+        }
+xmlReader = new QXmlStreamReader(xmlFile);
 
 
+//Parse the XML until we reach end of it
+while(!xmlReader->atEnd() && !xmlReader->hasError()) {
+        // Read next element
+        QXmlStreamReader::TokenType token = xmlReader->readNext();
+        //If token is just StartDocument - go to next
+        if(token == QXmlStreamReader::StartDocument) {
+                continue;
+        }
+        //If token is StartElement - read it
+        if(token == QXmlStreamReader::StartElement) {
+
+                if(xmlReader->name() == "name") {
+                        continue;
+                }
+
+                if(xmlReader->name() == "id") {
+                    qDebug() << xmlReader->readElementText();
+                }
+        }
+}
+
+if(xmlReader->hasError()) {
+        QMessageBox::critical(this,
+        "xmlFile.xml Parse Error",xmlReader->errorString(),
+        QMessageBox::Ok);
+        return;
+}
+
+//close reader and flush file
+xmlReader->clear();
+xmlFile->close();
+
+
+
+      */
 }
 
