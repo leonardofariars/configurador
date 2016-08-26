@@ -42,7 +42,7 @@ public:
 
     void GravaArquivo();
     void LeArquivo();
-    void LeArquivo2();
+    void LeArquivo2(QString arquivo);
 
 
 private:

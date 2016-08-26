@@ -17,6 +17,9 @@ public:
     explicit ConfigWindow(QWidget *parent = 0);
     ManipuladorXML getManipuladorXML() const;
 
+    void avancaPagina();
+    void retornaPagina();
+
 
     ~ConfigWindow();
 

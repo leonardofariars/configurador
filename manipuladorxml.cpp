@@ -222,9 +222,9 @@ void ManipuladorXML::LeArquivo(){
 
 }
 
-void ManipuladorXML::LeArquivo2(){
+void ManipuladorXML::LeArquivo2(QString arquivo){
 
-    QFile arqXML("c:/config.xml");
+    QFile arqXML(arquivo);
 
     if (! arqXML.open(QIODevice::ReadOnly | QIODevice::Text) ) {
 
@@ -234,86 +234,40 @@ void ManipuladorXML::LeArquivo2(){
      }
     QXmlStreamReader xmlReader(&arqXML);
 
+    // Faz um loop percorrendo cada elemento até que seja o fim do arquivo
+    // ou encontre algum erro.
 
-
-    while(!xmlReader.atEnd() && !xmlReader.hasError()) {
+    while( !xmlReader.atEnd() && !xmlReader.hasError() ) {
 
         // Read next element
         QXmlStreamReader::TokenType token = xmlReader.readNext();
         //If token is just StartDocument - go to next
-        if(token == QXmlStreamReader::StartDocument) {
+        if( token == QXmlStreamReader::StartDocument ) {
             continue;
         }
         //If token is StartElement - read it
-        if(token == QXmlStreamReader::StartElement) {
-            if(xmlReader.name() == "name") {
+        if( token == QXmlStreamReader::StartElement ) {
+            if( xmlReader.name() == "empresa" ) {
                 continue;
             }
-            if(xmlReader.name() == "id") {
-                qDebug() << xmlReader.readElementText();
-            }
+            QString valor = xmlReader.readElementText();
+            if( xmlReader.name() == "nome" )
+                setEmpresa(valor);
+
+            if ( xmlReader.name() == "telefone")
+                setTelefone(valor);
+
+            if ( xmlReader.name() == "cnpj")
+                setCNPJ(valor);
         }
     }
 
 
-/*
-    while (! xmlReader.atEnd()){
-
-        if (xmlReader.name() == "nome"){
-            QString nmempresa = xmlReader.readElementText();
-            setEmpresa(nmempresa);
-        } else xmlReader.readNext();
-
-    }
-
-*/
-
-    /*
-
-xmlFile = new QFile("xmlFile.xml");
-        if (!xmlFile->open(QIODevice::ReadOnly | QIODevice::Text)) {
-                QMessageBox::critical(this,"Load XML File Problem",
-                "Couldn't open xmlfile.xml to load settings for download",
-                QMessageBox::Ok);
-                return;
-        }
-xmlReader = new QXmlStreamReader(xmlFile);
-
-
-//Parse the XML until we reach end of it
-while(!xmlReader->atEnd() && !xmlReader->hasError()) {
-        // Read next element
-        QXmlStreamReader::TokenType token = xmlReader->readNext();
-        //If token is just StartDocument - go to next
-        if(token == QXmlStreamReader::StartDocument) {
-                continue;
-        }
-        //If token is StartElement - read it
-        if(token == QXmlStreamReader::StartElement) {
-
-                if(xmlReader->name() == "name") {
-                        continue;
-                }
-
-                if(xmlReader->name() == "id") {
-                    qDebug() << xmlReader->readElementText();
-                }
-        }
-}
-
-if(xmlReader->hasError()) {
-        QMessageBox::critical(this,
-        "xmlFile.xml Parse Error",xmlReader->errorString(),
-        QMessageBox::Ok);
-        return;
-}
-
-//close reader and flush file
-xmlReader->clear();
-xmlFile->close();
+    xmlReader.clear();
+    arqXML.close();
 
 
 
-      */
+
 }
 

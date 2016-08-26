@@ -25,6 +25,16 @@ ManipuladorXML ConfigWindow::getManipuladorXML() const{
     return propXML;
 }
 
+void ConfigWindow::avancaPagina(){
+    ui->tbx_paginas->setCurrentIndex(
+        ui->tbx_paginas->currentIndex() + 1 );
+}
+
+void ConfigWindow::retornaPagina(){
+    ui->tbx_paginas->setCurrentIndex(
+        ui->tbx_paginas->currentIndex() - 1 );
+}
+
 ConfigWindow::~ConfigWindow()
 {
 
@@ -36,8 +46,8 @@ ConfigWindow::~ConfigWindow()
 void ConfigWindow::on_buttonBox_accepted()
 {
     ManipuladorXML leitor;
-    leitor.LeArquivo();
-    leitor.LeArquivo2();
+    //leitor.LeArquivo();
+    //leitor.LeArquivo2(QString );
     ui->edt_nome->setText(leitor.getEmpresa());
     ui->edt_cnpj->setText(leitor.getCNPJ());
     ui->edt_telefone->setText(leitor.getTelefone());
