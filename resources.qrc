@@ -1,6 +1,10 @@
 <RCC>
     <qresource prefix="/imgs">
-        <file>imgs/avancar.png</file>
-        <file>imgs/voltar.png</file>
+        <file>imgs/voltar_.png</file>
+        <file>imgs/avancar_.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>imgs/save_32.png</file>
+        <file>imgs/iconeW.png</file>
     </qresource>
 </RCC>

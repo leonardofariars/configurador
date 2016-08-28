@@ -1,3 +1,21 @@
+/* Leonardo de Oliveira Faria
+ *
+ *
+ * Esta classe é responsável por armazenar os dados do arquivo XML
+ * de configuração em suas propriedades. Ela busca o arquivo, que
+ * deve estar no layout padrão da aplicação, e faz a leitura de
+ * seus campos.
+ * Para cada campo do arquivo, existe uma propriedade na clasee,
+ * bem como métodos SET e GET, responsáveis por atribuir e ler
+ * os valores dos mesmos.
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
 #include "manipuladorxml.h"
 #include "stdio.h"
 #include "iostream"
@@ -23,8 +41,9 @@
 
 
 ManipuladorXML::ManipuladorXML(const QString &Empresa, const QString &Telefone, const QString &CNPJ,
-        const QString &End1, const QString &End2, const int &NMesas,
-        const bool &CalcTX, const float &TXServ, const QString &TxtProm){
+        const QString &End1, const QString &End2, const int &NMesas,const bool &CalcTX,
+        const float &TXServ, const QString &Msg1, const QString &Msg2, const QString &fqdn,
+        const int &Porta, const QString &Usuario, const QString &Senha){
 
     vEmpresa = Empresa;
     vTelefone = Telefone;
@@ -34,7 +53,12 @@ ManipuladorXML::ManipuladorXML(const QString &Empresa, const QString &Telefone, 
     vNMesas = NMesas;
     vCalcTX = CalcTX;
     vTXServ = TXServ;
-    vTxtProm = TxtProm;
+    vMsg1 = Msg1;
+    vMsg1 = Msg2;
+    vFQDN = fqdn;
+    vPorta = Porta;
+    vUsuario = Usuario;
+    vSenha = Senha;
 }
 
 void ManipuladorXML::setEmpresa(const QString &Empresa){
@@ -69,8 +93,28 @@ void ManipuladorXML::setTXServ(const float &TXServ){
     vTXServ = TXServ;
 }
 
-void ManipuladorXML::setTXProm(const QString &TxtProm){
-    vTxtProm = TxtProm;
+void ManipuladorXML::setMsg1(const QString &Msg1){
+    vMsg1 = Msg1;
+}
+
+void ManipuladorXML::setMsg2(const QString &Msg2){
+    vMsg2 = Msg2;
+}
+
+void ManipuladorXML::setFQDN(const QString &fqdn){
+    vFQDN = fqdn;
+}
+
+void ManipuladorXML::setPorta(const int &Porta){
+    vPorta = Porta;
+}
+
+void ManipuladorXML::setUsuario(const QString &Usuario){
+    vUsuario = Usuario;
+}
+
+void ManipuladorXML::setSenha(const QString &Senha){
+    vSenha = Senha;
 }
 
 QString ManipuladorXML::getEmpresa(){
@@ -105,38 +149,79 @@ float ManipuladorXML::getTXServ(){
     return vTXServ;
 }
 
-QString ManipuladorXML::getTxtProm(){
-    return vTxtProm;
+QString ManipuladorXML::getMsg1(){
+    return vMsg1;
+}
+
+QString ManipuladorXML::getMsg2(){
+    return vMsg2;
+}
+
+QString ManipuladorXML::getFQDN(){
+    return vFQDN;
+}
+
+int ManipuladorXML::getPorta(){
+    return vPorta;
+}
+
+QString ManipuladorXML::getUsuario(){
+    return vUsuario;
+}
+
+QString ManipuladorXML::getSenha(){
+    return vSenha;
+}
+
+void ManipuladorXML::GravaArquivo(QString arquivo){
+    QFile arqXML (arquivo);
+
+    if (! arqXML.open(QIODevice::WriteOnly))
+        return;
+
+    QXmlStreamWriter xmlWriter(&arqXML);
+
+    xmlWriter.setAutoFormatting(true);
+    xmlWriter.writeStartDocument();
+    xmlWriter.writeStartElement("configuracoes");
+
+    xmlWriter.writeStartElement("empresa");
+        xmlWriter.writeTextElement("nome",getEmpresa());
+        xmlWriter.writeTextElement("telefone",getTelefone());
+        xmlWriter.writeTextElement("cnpj",getCNPJ());
+        xmlWriter.writeTextElement("end1",getEnd1());
+        xmlWriter.writeTextElement("end2",getEnd2());
+    xmlWriter.writeEndElement();
+
+    xmlWriter.writeStartElement("atendimento");
+        xmlWriter.writeTextElement("nmesas",QString(getNMesas()));
+        xmlWriter.writeTextElement("msg1",getMsg1());
+        xmlWriter.writeTextElement("msg2",getMsg2());
+        //xmlWriter.writeTextElement("calcserv",getTXServ());
+        //xmlWriter.writeAttribute()
+    xmlWriter.writeEndElement();
+
+    xmlWriter.writeStartElement("db");
+        xmlWriter.writeTextElement("fqdn",getFQDN());
+        xmlWriter.writeTextElement("porta",QString(getPorta()));
+        xmlWriter.writeTextElement("usuario",getUsuario());
+        xmlWriter.writeTextElement("senha",getSenha());
+    xmlWriter.writeEndElement();
+
+    xmlWriter.writeEndDocument();
+
+    arqXML.close();
 }
 
 
-void ManipuladorXML::GravaArquivo(){
-    /*
-    //QString caminho = GetCurrentDir;
-    QString NomeDoArquivo =  "config.xml";
-    QFile file(NomeDoArquivo);
-
-    QDomDocument arquivo;
-    arquivo.setContent(&file);
-
-    QDomElement raiz = arquivo.firstChildElement();
-
-
-
-    QString nomempresa = raiz.elementsByTagName("Empresa");
-
-
-    QTextStream xout (&file);
-    xout << arquivo.toString();
-    file.flush();
-    file.close();
-    */
-}
 
 
 void ManipuladorXML::LeArquivo(QString arquivo){
 
     QFile arqXML(arquivo);
+
+    // Se não for possível abrir o arquivo para leitura,
+    // interrompe o processo.
 
     if (! arqXML.open(QIODevice::ReadOnly | QIODevice::Text) ) {
 
@@ -144,47 +229,67 @@ void ManipuladorXML::LeArquivo(QString arquivo){
 //        "Ocorreu um problema ao abrir o arquivo XML com configurações da aplicação.");
                     return;
      }
+
     QXmlStreamReader xmlReader(&arqXML);
+
 
     // Faz um loop percorrendo cada elemento até que seja o fim do arquivo
     // ou encontre algum erro.
 
-    while( !xmlReader.atEnd() && !xmlReader.hasError() ) {
+    while( !xmlReader.atEnd() ) {
 
-        // Read next element
-        QXmlStreamReader::TokenType token = xmlReader.readNext();
-        //If token is just StartDocument - go to next
-        if( token == QXmlStreamReader::StartDocument ) {
+        xmlReader.readNext();
+
+        if( xmlReader.name() == "empresa" || xmlReader.name() == "atendimento" || xmlReader.name() == "db" || xmlReader.name() == "configuracoes") {
             continue;
         }
-        //If token is StartElement - read it
-        if( token == QXmlStreamReader::StartElement ) {
-            if( xmlReader.name() == "empresa" ) {
-                continue;
+
+        QString valor = xmlReader.readElementText();
+
+        if( xmlReader.name() == "nome" )
+            setEmpresa(valor);
+
+        if ( xmlReader.name() == "telefone")
+            setTelefone(valor);
+
+        if ( xmlReader.name() == "cnpj")
+            setCNPJ(valor);
+
+        if ( xmlReader.name() == "end1")
+            setEnd1(valor);
+
+        if ( xmlReader.name() == "end2")
+            setEnd2(valor);
+
+        if( xmlReader.name() == "nmesas" )
+            setNMesas(valor.toInt());
+
+        if ( xmlReader.name() == "msg1" )
+            setMsg1(valor);
+
+        if ( xmlReader.name() == "msg2" )
+            setMsg2(valor);
+
+            // Como o elemento calcserv possui um atributo,
+            // sua leitura precisa ser um pouco diferente
+
+        if ( xmlReader.name() == "calcserv" ){
+            setTXServ(valor.toDouble());
+            foreach (const QXmlStreamAttribute &attr, xmlReader.attributes()) {
+                QString natr = attr.name().toString();
+                if (natr == "status"){
+                    if (attr.value() == "true")
+                        setTXServ(true);
+                    else setTXServ(false);
+                }
             }
-            QString valor = xmlReader.readElementText();
-            if( xmlReader.name() == "nome" )
-                setEmpresa(valor);
-
-            if ( xmlReader.name() == "telefone")
-                setTelefone(valor);
-
-            if ( xmlReader.name() == "cnpj")
-                setCNPJ(valor);
         }
-        if (token == QXmlStreamReader::StartElement){
-            if (xmlReader.name() == "atendimento"){
 
-            }
-        }
+        continue;
     }
-
 
     xmlReader.clear();
     arqXML.close();
-
-
-
 
 }
 

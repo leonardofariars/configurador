@@ -12,7 +12,9 @@ class ManipuladorXML
 public:
     ManipuladorXML(const QString &Empresa = "",const QString &Telefone = "",const QString &CNPJ = "",
                    const QString &End1 = "",const QString &End2 = "",const int &NMesas =1 ,
-                   const bool &CalcTX = false,const float &TXServ = 0.0,const QString &TxtProm = "");
+                   const bool &CalcTX = false,const float &TXServ = 0.0,const QString &Msg1 = "",
+                   const QString &Msg2 = "",const QString &fqdn = "",const int &Porta = 0,
+                   const QString &Usuario = "", const QString &Senha = "");
 
     // Grava os valores nas propriedades da classe
 
@@ -24,7 +26,12 @@ public:
     void setNMesas (const int &NMesas);
     void setCalcTX (const bool &CalcTX);
     void setTXServ (const float &TXServ);
-    void setTXProm (const QString &TxtProm);
+    void setMsg1 (const QString &Msg1);
+    void setMsg2 (const QString &TxtProm);
+    void setFQDN (const QString &fqdn);
+    void setPorta (const int &Porta);
+    void setUsuario (const QString &Usuario);
+    void setSenha (const QString &Senha);
 
     // Lê os valores atribuidos a cada propriedade da classe
 
@@ -36,11 +43,16 @@ public:
     int getNMesas();
     bool getCalcTX();
     float getTXServ();
-    QString getTxtProm();
+    QString getMsg1();
+    QString getMsg2();
+    QString getFQDN();
+    int getPorta();
+    QString getUsuario();
+    QString getSenha();
 
     // Manipulação do arquivo XML
 
-    void GravaArquivo(); 
+    void GravaArquivo(QString arquivo);
     void LeArquivo(QString arquivo);
 
 
@@ -53,7 +65,12 @@ private:
     int vNMesas;
     bool vCalcTX;
     float vTXServ;
-    QString vTxtProm;
+    QString vMsg1;
+    QString vMsg2;
+    QString vFQDN;
+    int vPorta;
+    QString vUsuario;
+    QString vSenha;
 };
 
 #endif // MANIPULADORXML_H

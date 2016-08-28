@@ -26,13 +26,14 @@ public:
 private slots:
 
 
-    void on_buttonBox_accepted();
 
-    void on_commandLinkButton_clicked();
+    void on_pushButton_clicked();
 
-    void on_commandLinkButton_2_clicked();
+    void on_pushButton_2_clicked();
 
-    void on_commandLinkButton_3_clicked();
+    void on_pushButton_3_clicked();
+
+    void on_btn_grava_clicked();
 
 private:
     Ui::ConfigWindow *ui;
