@@ -8,8 +8,15 @@
 ConfigWindow::ConfigWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ConfigWindow)
+
+
+
 {
     ui->setupUi(this);
+
+    ManipuladorXML leitor;
+    leitor.LeArquivo(".//config.xml");
+
     //ui->edt_nome->setText(propXML.getEmpresa());
 
 /*
@@ -45,10 +52,20 @@ ConfigWindow::~ConfigWindow()
 
 void ConfigWindow::on_buttonBox_accepted()
 {
-    ManipuladorXML leitor;
-    //leitor.LeArquivo();
-    //leitor.LeArquivo2(QString );
-    ui->edt_nome->setText(leitor.getEmpresa());
-    ui->edt_cnpj->setText(leitor.getCNPJ());
-    ui->edt_telefone->setText(leitor.getTelefone());
+    ManipuladorXML gravador;
+    gravador.GravaArquivo();
+
+}
+
+void ConfigWindow::on_commandLinkButton_clicked(){
+    avancaPagina();
+}
+
+void ConfigWindow::on_commandLinkButton_2_clicked(){
+    avancaPagina();
+}
+
+void ConfigWindow::on_commandLinkButton_3_clicked()
+{
+    retornaPagina();
 }

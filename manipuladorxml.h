@@ -40,9 +40,8 @@ public:
 
     // Manipulação do arquivo XML
 
-    void GravaArquivo();
-    void LeArquivo();
-    void LeArquivo2(QString arquivo);
+    void GravaArquivo(); 
+    void LeArquivo(QString arquivo);
 
 
 private:

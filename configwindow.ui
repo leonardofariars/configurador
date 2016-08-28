@@ -50,7 +50,7 @@
       <property name="title">
        <string> Endereço </string>
       </property>
-      <widget class="QLineEdit" name="lineEdit_4">
+      <widget class="QLineEdit" name="edt_end1">
        <property name="geometry">
         <rect>
          <x>60</x>
@@ -60,7 +60,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_5">
+      <widget class="QLineEdit" name="edt_end2">
        <property name="geometry">
         <rect>
          <x>60</x>
@@ -83,7 +83,7 @@
         <string>Linha 1:</string>
        </property>
        <property name="buddy">
-        <cstring>lineEdit_4</cstring>
+        <cstring>edt_end1</cstring>
        </property>
       </widget>
       <widget class="QLabel" name="label_5">
@@ -99,17 +99,17 @@
         <string>Linha 2:</string>
        </property>
        <property name="buddy">
-        <cstring>lineEdit_5</cstring>
+        <cstring>edt_end2</cstring>
        </property>
       </widget>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>170</y>
         <width>451</width>
-        <height>42</height>
+        <height>44</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -128,14 +128,29 @@
        </item>
        <item>
         <widget class="QCommandLinkButton" name="commandLinkButton">
+         <property name="styleSheet">
+          <string notr="true">background-image: url(:/imgs/imgs/avancar.png);
+background-repeat: no-repeat;
+ background-size: cover;</string>
+         </property>
          <property name="text">
-          <string>CommandLinkButton</string>
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>imgs/forward.png</normaloff>imgs/forward.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -159,12 +174,12 @@
             <string>Razão Social:</string>
            </property>
            <property name="buddy">
-            <cstring>lineEdit</cstring>
+            <cstring>edt_nmempresa</cstring>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit"/>
+          <widget class="QLineEdit" name="edt_nmempresa"/>
          </item>
         </layout>
        </item>
@@ -178,12 +193,12 @@
               <string>Telefone:</string>
              </property>
              <property name="buddy">
-              <cstring>lineEdit_2</cstring>
+              <cstring>edt_fnemp</cstring>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_2">
+            <widget class="QLineEdit" name="edt_fnemp">
              <property name="minimumSize">
               <size>
                <width>80</width>
@@ -221,12 +236,12 @@
               <string>CNPJ:</string>
              </property>
              <property name="buddy">
-              <cstring>lineEdit_3</cstring>
+              <cstring>edt_cnpj</cstring>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_3">
+            <widget class="QLineEdit" name="edt_cnpj">
              <property name="inputMask">
               <string>99.999.999/9999-99</string>
              </property>
@@ -254,30 +269,7 @@
      <attribute name="label">
       <string>Configurações de Atendimento</string>
      </attribute>
-     <widget class="QSpinBox" name="spinBox">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>90</y>
-        <width>42</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_7">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>90</y>
-        <width>91</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Número de Mesas:</string>
-      </property>
-     </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -288,7 +280,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QCheckBox" name="checkBox">
+        <widget class="QCheckBox" name="chk_calcServ">
          <property name="text">
           <string>Cálculo automático da taxa de serviço</string>
          </property>
@@ -308,31 +300,49 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="label_6">
+        <widget class="QLabel" name="lbl_percServ">
          <property name="text">
           <string>Percentual de serviço:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+        <widget class="QDoubleSpinBox" name="edt_percServ"/>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>150</y>
         <width>456</width>
-        <height>42</height>
+        <height>44</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QCommandLinkButton" name="commandLinkButton_3">
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-image: url(:/imgs/imgs/voltar.png);
+background-repeat: no-repeat;
+ background-size: cover;</string>
+         </property>
          <property name="text">
-          <string>CommandLinkButton</string>
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>imgs/backward.png</normaloff>imgs/backward.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -351,15 +361,59 @@
        </item>
        <item>
         <widget class="QCommandLinkButton" name="commandLinkButton_2">
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-image: url(:/imgs/imgs/avancar.png);
+background-repeat: no-repeat;
+ background-size: cover;</string>
+         </property>
          <property name="text">
-          <string>CommandLinkButton</string>
+          <string/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>70</y>
+        <width>151</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_11">
+       <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>Número de Mesas:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="edt_numMesa"/>
+       </item>
+      </layout>
+     </widget>
     </widget>
     <widget class="QWidget" name="page_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>461</width>
+       <height>220</height>
+      </rect>
+     </property>
      <attribute name="label">
       <string>Configurações do Sistema</string>
      </attribute>
@@ -369,19 +423,19 @@
         <x>0</x>
         <y>0</y>
         <width>451</width>
-        <height>71</height>
+        <height>111</height>
        </rect>
       </property>
       <property name="title">
        <string> Conexão com o Banco de Dados </string>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>30</y>
+         <y>20</y>
          <width>411</width>
-         <height>22</height>
+         <height>20</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -393,7 +447,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_6">
+         <widget class="QLineEdit" name="edt_fqdn">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
             <horstretch>0</horstretch>
@@ -402,7 +456,7 @@
           </property>
           <property name="minimumSize">
            <size>
-            <width>80</width>
+            <width>120</width>
             <height>0</height>
            </size>
           </property>
@@ -438,7 +492,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="spinBox_2">
+         <widget class="QSpinBox" name="edt_portbd">
           <property name="minimumSize">
            <size>
             <width>60</width>
@@ -454,7 +508,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>80</y>
+        <y>120</y>
         <width>451</width>
         <height>91</height>
        </rect>
@@ -462,7 +516,7 @@
       <property name="title">
        <string> Mensagem de Rodapé </string>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -480,11 +534,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_7"/>
+         <widget class="QLineEdit" name="edt_msg1"/>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -502,7 +556,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_8"/>
+         <widget class="QLineEdit" name="edt_msg2"/>
         </item>
        </layout>
       </widget>

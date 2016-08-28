@@ -1,5 +1,6 @@
 <RCC>
-    <qresource prefix="/icons">
-        <file>imgs/osxConfigProfileIcon.png</file>
+    <qresource prefix="/imgs">
+        <file>imgs/avancar.png</file>
+        <file>imgs/voltar.png</file>
     </qresource>
 </RCC>

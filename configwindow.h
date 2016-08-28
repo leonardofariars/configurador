@@ -28,6 +28,12 @@ private slots:
 
     void on_buttonBox_accepted();
 
+    void on_commandLinkButton_clicked();
+
+    void on_commandLinkButton_2_clicked();
+
+    void on_commandLinkButton_3_clicked();
+
 private:
     Ui::ConfigWindow *ui;
     ManipuladorXML propXML;
