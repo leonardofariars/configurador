@@ -194,7 +194,7 @@ void ManipuladorXML::GravaArquivo(QString arquivo){
     xmlWriter.writeEndElement();
 
     xmlWriter.writeStartElement("atendimento");
-        xmlWriter.writeTextElement("nmesas",QString(getNMesas()));
+        xmlWriter.writeTextElement("nmesas",QString::number(getNMesas()));
         xmlWriter.writeTextElement("msg1",getMsg1());
         xmlWriter.writeTextElement("msg2",getMsg2());
         //xmlWriter.writeTextElement("calcserv",getTXServ());
@@ -203,7 +203,7 @@ void ManipuladorXML::GravaArquivo(QString arquivo){
 
     xmlWriter.writeStartElement("db");
         xmlWriter.writeTextElement("fqdn",getFQDN());
-        xmlWriter.writeTextElement("porta",QString(getPorta()));
+        xmlWriter.writeTextElement("porta",QString::number(getPorta()));
         xmlWriter.writeTextElement("usuario",getUsuario());
         xmlWriter.writeTextElement("senha",getSenha());
     xmlWriter.writeEndElement();
@@ -269,6 +269,18 @@ void ManipuladorXML::LeArquivo(QString arquivo){
 
         if ( xmlReader.name() == "msg2" )
             setMsg2(valor);
+
+        if ( xmlReader.name() == "usuario")
+            setUsuario(valor);
+
+        if ( xmlReader.name() == "fqdn")
+            setFQDN(valor);
+
+        if ( xmlReader.name() == "porta")
+            setPorta(valor.toInt());
+
+        if ( xmlReader.name() == "senha")
+            setSenha(valor);
 
             // Como o elemento calcserv possui um atributo,
             // sua leitura precisa ser um pouco diferente
