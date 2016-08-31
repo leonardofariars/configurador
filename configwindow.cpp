@@ -1,6 +1,8 @@
 #include "configwindow.h"
 #include "ui_configwindow.h"
 #include "limits.h"
+#include "simplecrypt.h"
+
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -55,6 +57,11 @@ void ConfigWindow::retornaPagina(){
 
 QString ConfigWindow::Criptografa(QString Texto){
 
+    SimpleCrypt crypto(Q_UINT64_C(0x0c2ad4a4acb9f023));
+
+
+   /*
+
     QString resultado = "";
     int minimo = INT_MAX;
     int vInput [Texto.size()];
@@ -70,7 +77,6 @@ QString ConfigWindow::Criptografa(QString Texto){
         charMod[i] = vInput[i] % minimo;
     }
 
-
     int encKey[Texto.size()];
     for (int i = 0; i < Texto.size(); i++){
         encKey[i]= keymod[i]+charMod[i];
@@ -83,22 +89,11 @@ QString ConfigWindow::Criptografa(QString Texto){
         resultado += caractere;
     }
 
-
-
-
-
     // Joga para um vetor de interios o decimal
     // correspondente a senha digitada.
 
-
-
-
-
-
-
-
     return resultado;
-
+*/
 }
 
 
