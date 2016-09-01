@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>482</width>
+    <width>479</width>
     <height>365</height>
    </rect>
   </property>
@@ -34,7 +34,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <property name="geometry">
@@ -172,7 +172,7 @@
               <string>(99)09999-9999</string>
              </property>
              <property name="text">
-              <string>(88)88888-8888</string>
+              <string>()-</string>
              </property>
             </widget>
            </item>
@@ -209,7 +209,7 @@
               <string>99.999.999/9999-99</string>
              </property>
              <property name="text">
-              <string>88.888.888/8888-88</string>
+              <string>../-</string>
              </property>
             </widget>
            </item>
@@ -233,7 +233,6 @@
       </property>
       <property name="styleSheet">
        <string notr="true">background-image: url(:/imgs/imgs/avancar_.png);
-background-size: cover;
 background-repeat: no-repeat;</string>
       </property>
       <property name="text">
@@ -256,12 +255,84 @@ background-repeat: no-repeat;</string>
      <attribute name="label">
       <string>Configurações de Atendimento</string>
      </attribute>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>150</y>
+        <width>171</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image: url(:/imgs/imgs/avancar_.png);
+background-repeat: no-repeat;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>150</y>
+        <width>171</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image: url(:/imgs/imgs/voltar_.png);
+background-repeat: no-repeat;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>150</x>
+        <y>70</y>
+        <width>151</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>Número de Mesas:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="edt_numMesa">
+         <property name="inputMask">
+          <string>900</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
         <y>20</y>
-        <width>417</width>
+        <width>382</width>
         <height>22</height>
        </rect>
       </property>
@@ -294,79 +365,16 @@ background-repeat: no-repeat;</string>
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="edt_percServ"/>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>70</y>
-        <width>151</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_11">
-       <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-        <widget class="QLabel" name="label_7">
+        <widget class="QLineEdit" name="edt_percServ">
+         <property name="inputMask">
+          <string>90.99</string>
+         </property>
          <property name="text">
-          <string>Número de Mesas:</string>
+          <string>00.00</string>
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QSpinBox" name="edt_numMesa"/>
-       </item>
       </layout>
-     </widget>
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="geometry">
-       <rect>
-        <x>280</x>
-        <y>150</y>
-        <width>171</width>
-        <height>60</height>
-       </rect>
-      </property>
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-image: url(:/imgs/imgs/avancar_.png);
-background-size: cover;
-background-repeat: no-repeat;</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="flat">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_3">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>150</y>
-        <width>171</width>
-        <height>60</height>
-       </rect>
-      </property>
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-image: url(:/imgs/imgs/voltar_.png);
-background-size: cover;
-background-repeat: no-repeat;</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="flat">
-       <bool>true</bool>
-      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="page_3">
@@ -397,6 +405,48 @@ background-repeat: no-repeat;</string>
        <property name="geometry">
         <rect>
          <x>10</x>
+         <y>60</y>
+         <width>411</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Usuário:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="edt_usuario"/>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Senha:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="edt_senha">
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Máximo de 10 caracteres.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="maxLength">
+           <number>10</number>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>11</x>
          <y>20</y>
          <width>411</width>
          <height>22</height>
@@ -427,12 +477,9 @@ background-repeat: no-repeat;</string>
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer_4">
+         <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::MinimumExpanding</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -456,46 +503,23 @@ background-repeat: no-repeat;</string>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="edt_portbd">
+         <widget class="QLineEdit" name="edt_portdb">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="minimumSize">
            <size>
-            <width>60</width>
+            <width>0</width>
             <height>0</height>
            </size>
           </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>60</y>
-         <width>411</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QLabel" name="label_6">
-          <property name="text">
-           <string>Usuário:</string>
+          <property name="inputMask">
+           <string>90000</string>
           </property>
          </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="edt_usuario"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_12">
-          <property name="text">
-           <string>Senha:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="edt_senha"/>
         </item>
        </layout>
       </widget>
@@ -594,6 +618,26 @@ background-repeat: no-repeat;</string>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>edt_nmempresa</tabstop>
+  <tabstop>edt_fnemp</tabstop>
+  <tabstop>edt_cnpj</tabstop>
+  <tabstop>edt_end1</tabstop>
+  <tabstop>edt_end2</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>chk_calcServ</tabstop>
+  <tabstop>edt_percServ</tabstop>
+  <tabstop>edt_numMesa</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>edt_fqdn</tabstop>
+  <tabstop>edt_portdb</tabstop>
+  <tabstop>edt_usuario</tabstop>
+  <tabstop>edt_senha</tabstop>
+  <tabstop>edt_msg1</tabstop>
+  <tabstop>edt_msg2</tabstop>
+  <tabstop>btn_grava</tabstop>
+ </tabstops>
  <resources>
   <include location="resources.qrc"/>
  </resources>

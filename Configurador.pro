@@ -15,10 +15,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         configwindow.cpp \
-    manipuladorxml.cpp
+    manipuladorxml.cpp \
+    simplecrypt.cpp
 
 HEADERS  += configwindow.h \
-    manipuladorxml.h
+    manipuladorxml.h \
+    simplecrypt.h
 
 FORMS    += configwindow.ui
 

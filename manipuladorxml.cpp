@@ -194,16 +194,20 @@ void ManipuladorXML::GravaArquivo(QString arquivo){
     xmlWriter.writeEndElement();
 
     xmlWriter.writeStartElement("atendimento");
-        xmlWriter.writeTextElement("nmesas",QString(getNMesas()));
+        xmlWriter.writeTextElement("nmesas",QString::number(getNMesas()));
         xmlWriter.writeTextElement("msg1",getMsg1());
         xmlWriter.writeTextElement("msg2",getMsg2());
-        //xmlWriter.writeTextElement("calcserv",getTXServ());
-        //xmlWriter.writeAttribute()
+        xmlWriter.writeTextElement( "percserv",QString::number( getTXServ() ) );
+
+        if ( getCalcTX() )
+            xmlWriter.writeTextElement("calcserv","s");
+            else xmlWriter.writeTextElement("calcserv","n");
+
     xmlWriter.writeEndElement();
 
     xmlWriter.writeStartElement("db");
         xmlWriter.writeTextElement("fqdn",getFQDN());
-        xmlWriter.writeTextElement("porta",QString(getPorta()));
+        xmlWriter.writeTextElement("porta",QString::number(getPorta()));
         xmlWriter.writeTextElement("usuario",getUsuario());
         xmlWriter.writeTextElement("senha",getSenha());
     xmlWriter.writeEndElement();
@@ -216,7 +220,7 @@ void ManipuladorXML::GravaArquivo(QString arquivo){
 
 
 
-void ManipuladorXML::LeArquivo(QString arquivo){
+bool ManipuladorXML::LeArquivo(QString arquivo){
 
     QFile arqXML(arquivo);
 
@@ -227,7 +231,7 @@ void ManipuladorXML::LeArquivo(QString arquivo){
 
 //        QMessageBox::critical(this,"Erro de leitura",
 //        "Ocorreu um problema ao abrir o arquivo XML com configurações da aplicação.");
-                    return;
+                    return false;
      }
 
     QXmlStreamReader xmlReader(&arqXML);
@@ -270,26 +274,32 @@ void ManipuladorXML::LeArquivo(QString arquivo){
         if ( xmlReader.name() == "msg2" )
             setMsg2(valor);
 
-            // Como o elemento calcserv possui um atributo,
-            // sua leitura precisa ser um pouco diferente
+        if ( xmlReader.name() == "usuario")
+            setUsuario(valor);
 
-        if ( xmlReader.name() == "calcserv" ){
-            setTXServ(valor.toDouble());
-            foreach (const QXmlStreamAttribute &attr, xmlReader.attributes()) {
-                QString natr = attr.name().toString();
-                if (natr == "status"){
-                    if (attr.value() == "true")
-                        setTXServ(true);
-                    else setTXServ(false);
-                }
-            }
-        }
+        if ( xmlReader.name() == "fqdn")
+            setFQDN(valor);
+
+        if ( xmlReader.name() == "porta")
+            setPorta(valor.toInt());
+
+        if ( xmlReader.name() == "senha")
+            setSenha(valor);
+
+        if ( xmlReader.name() == "calcserv")
+            if (valor == "s")
+                setCalcTX(true);
+            else setCalcTX(false);
+
+        if ( xmlReader.name() == "percserv")
+            setTXServ(valor.toFloat());
 
         continue;
     }
 
     xmlReader.clear();
     arqXML.close();
+    return true;
 
 }
 
