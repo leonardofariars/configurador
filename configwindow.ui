@@ -34,7 +34,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <property name="geometry">
@@ -615,19 +615,6 @@ background-repeat: no-repeat;</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>330</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -639,9 +626,12 @@ background-repeat: no-repeat;</string>
   <tabstop>edt_end2</tabstop>
   <tabstop>pushButton</tabstop>
   <tabstop>chk_calcServ</tabstop>
+  <tabstop>edt_percServ</tabstop>
+  <tabstop>edt_numMesa</tabstop>
   <tabstop>pushButton_2</tabstop>
   <tabstop>pushButton_3</tabstop>
   <tabstop>edt_fqdn</tabstop>
+  <tabstop>edt_portdb</tabstop>
   <tabstop>edt_usuario</tabstop>
   <tabstop>edt_senha</tabstop>
   <tabstop>edt_msg1</tabstop>

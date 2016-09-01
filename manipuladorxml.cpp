@@ -197,8 +197,12 @@ void ManipuladorXML::GravaArquivo(QString arquivo){
         xmlWriter.writeTextElement("nmesas",QString::number(getNMesas()));
         xmlWriter.writeTextElement("msg1",getMsg1());
         xmlWriter.writeTextElement("msg2",getMsg2());
-        //xmlWriter.writeTextElement("calcserv",getTXServ());
-        //xmlWriter.writeAttribute()
+        xmlWriter.writeTextElement( "percserv",QString::number( getTXServ() ) );
+
+        if ( getCalcTX() )
+            xmlWriter.writeTextElement("calcserv","s");
+            else xmlWriter.writeTextElement("calcserv","n");
+
     xmlWriter.writeEndElement();
 
     xmlWriter.writeStartElement("db");
@@ -216,7 +220,7 @@ void ManipuladorXML::GravaArquivo(QString arquivo){
 
 
 
-void ManipuladorXML::LeArquivo(QString arquivo){
+bool ManipuladorXML::LeArquivo(QString arquivo){
 
     QFile arqXML(arquivo);
 
@@ -227,7 +231,7 @@ void ManipuladorXML::LeArquivo(QString arquivo){
 
 //        QMessageBox::critical(this,"Erro de leitura",
 //        "Ocorreu um problema ao abrir o arquivo XML com configurações da aplicação.");
-                    return;
+                    return false;
      }
 
     QXmlStreamReader xmlReader(&arqXML);
@@ -282,26 +286,20 @@ void ManipuladorXML::LeArquivo(QString arquivo){
         if ( xmlReader.name() == "senha")
             setSenha(valor);
 
-            // Como o elemento calcserv possui um atributo,
-            // sua leitura precisa ser um pouco diferente
+        if ( xmlReader.name() == "calcserv")
+            if (valor == "s")
+                setCalcTX(true);
+            else setCalcTX(false);
 
-        if ( xmlReader.name() == "calcserv" ){
-            setTXServ(valor.toDouble());
-            foreach (const QXmlStreamAttribute &attr, xmlReader.attributes()) {
-                QString natr = attr.name().toString();
-                if (natr == "status"){
-                    if (attr.value() == "true")
-                        setTXServ(true);
-                    else setTXServ(false);
-                }
-            }
-        }
+        if ( xmlReader.name() == "percserv")
+            setTXServ(valor.toFloat());
 
         continue;
     }
 
     xmlReader.clear();
     arqXML.close();
+    return true;
 
 }
 

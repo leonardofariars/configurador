@@ -53,7 +53,7 @@ public:
     // Manipulação do arquivo XML
 
     void GravaArquivo(QString arquivo);
-    void LeArquivo(QString arquivo);
+    bool LeArquivo(QString arquivo);
 
 
 private:

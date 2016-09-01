@@ -21,21 +21,31 @@ ConfigWindow::ConfigWindow(QWidget *parent) :
 
 
 
-    leitor.LeArquivo(narq);
-    ui->edt_nmempresa->setText(leitor.getEmpresa());
-    ui->edt_cnpj->setText(leitor.getCNPJ());
-    ui->edt_fnemp->setText(leitor.getTelefone());
-    ui->edt_end1->setText(leitor.getEnd1());
-    ui->edt_end2->setText(leitor.getEnd2());
-    ui->chk_calcServ->setChecked(leitor.getCalcTX());
-    ui->edt_percServ->setText(QString::number(leitor.getTXServ()));
-    ui->edt_numMesa->setText(QString::number(leitor.getNMesas()));
-    ui->edt_msg1->setText(leitor.getMsg1());
-    ui->edt_msg2->setText(leitor.getMsg2());
-    ui->edt_fqdn->setText(leitor.getFQDN());
-    ui->edt_portdb->setText(QString::number(leitor.getPorta()));
-    ui->edt_usuario->setText(leitor.getUsuario());
-    ui->edt_senha->setText( Descriptografa( leitor.getSenha() ) );
+    if (leitor.LeArquivo(narq)){
+
+        ui->edt_nmempresa->setText(leitor.getEmpresa());
+        ui->edt_cnpj->setText(leitor.getCNPJ());
+        ui->edt_fnemp->setText(leitor.getTelefone());
+        ui->edt_end1->setText(leitor.getEnd1());
+        ui->edt_end2->setText(leitor.getEnd2());
+        ui->chk_calcServ->setChecked(leitor.getCalcTX());
+        ui->edt_percServ->setText(QString::number(leitor.getTXServ()));
+        ui->edt_numMesa->setText(QString::number(leitor.getNMesas()));
+        ui->edt_msg1->setText(leitor.getMsg1());
+        ui->edt_msg2->setText(leitor.getMsg2());
+        ui->edt_fqdn->setText(leitor.getFQDN());
+        ui->edt_portdb->setText(QString::number(leitor.getPorta()));
+        ui->edt_usuario->setText(leitor.getUsuario());
+        ui->edt_senha->setText( Descriptografa( leitor.getSenha() ) );
+
+    }
+
+    else {
+        QMessageBox::critical(this,"Erro ao abrir arquivo",
+    "Ocorreu um erro abrir o arquivo de configurações da aplicação.");
+        close();
+    }
+
 
 
 
@@ -56,58 +66,15 @@ void ConfigWindow::retornaPagina(){
 }
 
 QString ConfigWindow::Criptografa(QString Texto){
-
-    SimpleCrypt crypto(Q_UINT64_C(0x0c2ad4a4acb9f023));
-
-
-   /*
-
-    QString resultado = "";
-    int minimo = INT_MAX;
-    int vInput [Texto.size()];
-
-    for (int i = 0; i < Texto.size(); i++){
-        vInput[i] = int( Texto[i].toLatin1() );
-        if ( vInput[i] < minimo )
-            minimo = vInput[i];
-    }
-
-    int charMod[Texto.size()];
-    for (int i = 0; i < Texto.size(); i++){
-        charMod[i] = vInput[i] % minimo;
-    }
-
-    int encKey[Texto.size()];
-    for (int i = 0; i < Texto.size(); i++){
-        encKey[i]= keymod[i]+charMod[i];
-    }
-
-    int ciphText[Texto.size()];
-    for (int i = 0; i < Texto.size(); i++){
-        ciphText[i] = encKey[i] + minimo;
-        char caractere = static_cast<char>(ciphText[i]);
-        resultado += caractere;
-    }
-
-    // Joga para um vetor de interios o decimal
-    // correspondente a senha digitada.
-
-    return resultado;
-*/
+    SimpleCrypt s;
+    s.setKey(19820806);
+    return s.encryptToString(Texto);
 }
 
-
-
-
-
-
-
 QString ConfigWindow::Descriptografa(QString Texto){
-    QString resultado = "";
-    for(int i = 0; i < Texto.size(); ++i){
-        resultado += ( Texto[i].toLatin1() ) || (int('0') + i % 20);
-    }
-    return resultado;
+    SimpleCrypt s;
+    s.setKey(19820806);
+    return s.decryptToString(Texto);
 }
 
 
@@ -128,8 +95,8 @@ void ConfigWindow::on_pushButton_3_clicked(){
     retornaPagina();
 }
 
-void ConfigWindow::on_btn_grava_clicked()
-{
+void ConfigWindow::on_btn_grava_clicked(){
+
     ManipuladorXML gravador;
     // Empresa
     gravador.setEmpresa(ui->edt_nmempresa->text());
@@ -153,10 +120,4 @@ void ConfigWindow::on_btn_grava_clicked()
 
     gravador.GravaArquivo(QDir::currentPath()+"/config.xml");
     close();
-}
-
-
-void ConfigWindow::on_pushButton_4_clicked()
-{
-    Criptografa(ui->edt_senha->text());
 }
