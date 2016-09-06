@@ -6,6 +6,7 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QSqlDatabase>
 
 ConfigWindow::ConfigWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,6 +14,7 @@ ConfigWindow::ConfigWindow(QWidget *parent) :
 
 {
     ui->setupUi(this);
+    Banco = QSqlDatabase::addDatabase("QMYSQL");
 
     ManipuladorXML leitor;
 
@@ -120,4 +122,18 @@ void ConfigWindow::on_btn_grava_clicked(){
 
     gravador.GravaArquivo(QDir::currentPath()+"/config.xml");
     close();
+}
+
+void ConfigWindow::on_btn_tstcon_clicked(){
+    Banco.setHostName( ui->edt_fqdn->text() );
+    Banco.setPort( ui->edt_portdb->text().toInt() );
+    Banco.setUserName( ui->edt_usuario->text() );
+    Banco.setPassword( ui->edt_senha->text());
+    Banco.setDatabaseName( ui->edt_instancia->text() );
+    if (Banco.open()) {
+        //banco conectou
+    }
+    else {
+        }// banco nao conectou
+
 }

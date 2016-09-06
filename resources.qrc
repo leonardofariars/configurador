@@ -6,5 +6,6 @@
     <qresource prefix="/icons">
         <file>imgs/save_32.png</file>
         <file>imgs/iconeW.png</file>
+        <file>imgs/dbconnect.png</file>
     </qresource>
 </RCC>

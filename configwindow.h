@@ -2,6 +2,7 @@
 #define CONFIGWINDOW_H
 
 #include <QMainWindow>
+#include <QSqlDatabase>
 
 #include "manipuladorxml.h"
 
@@ -12,6 +13,7 @@ class ConfigWindow;
 class ConfigWindow : public QMainWindow
 {
     Q_OBJECT
+
 
 public:
     explicit ConfigWindow(QWidget *parent = 0);
@@ -36,9 +38,12 @@ private slots:
 //========================================+
     void on_btn_grava_clicked();
 
+    void on_btn_tstcon_clicked();
+
 private:
     Ui::ConfigWindow *ui;
     ManipuladorXML propXML;
+    QSqlDatabase Banco;
 };
 
 #endif // CONFIGWINDOW_H
